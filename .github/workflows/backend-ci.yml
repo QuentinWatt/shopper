@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and run Docker Compose
         run: |
-          docker-compose -f docker-compose.yml up -d
+          docker compose -f docker-compose.yml up -d
           sleep 30 # adjust time as needed for containers to start
 
       - name: Check containers are up and running
