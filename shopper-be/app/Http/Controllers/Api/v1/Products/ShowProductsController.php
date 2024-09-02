@@ -17,4 +17,3 @@ class ShowProductsController extends Controller
         return new ProductResourceCollection(Product::paginate(20));
     }
 }
-}

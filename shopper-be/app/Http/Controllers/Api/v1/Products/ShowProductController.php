@@ -17,4 +17,3 @@ class ShowProductController extends Controller
         return new ProductResource($product);
     }
 }
-}
