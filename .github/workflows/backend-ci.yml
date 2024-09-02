@@ -1,0 +1,49 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Backend CI
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:stable
+        options: --privileged
+        ports:
+          - 8000:80
+          - 3307:3306
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Create environmnet files
+        run: |
+          cp ./shopper-be/.env.example ./shopper-be/.env
+
+      - name: Build and run Docker Compose
+        run: |
+          docker compose -f docker-compose.prod.yml up -d
+          sleep 30 # adjust time as needed for containers to start
+
+      - name: Check containers are up and running
+        run: docker ps -a
+
+      - name: Composer install
+        run: docker compose exec shopper_be composer install
+
+      - name: Run Laravel migrations
+        run: |
+          docker compose exec shopper_be php artisan migrate --force
+          docker compose exec shopper_be php artisan db:seed
+
+      - name: Run Laravel tests
+        run: docker compose exec shopper_be php artisan test
