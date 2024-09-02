@@ -8,13 +8,6 @@ services:
       - "8000:80"
     depends_on:
       - shopper_db
-    environment:
-      DB_CONNECTION: mysql
-      DB_USERNAME: root
-      DB_HOST: shopper_db
-      DB_PORT: 3306
-      DB_PASSWORD: password
-      DB_DATABASE: shopper_db
     volumes:
       - ./shopper-be:/var/www/html
     networks:
@@ -29,6 +22,8 @@ services:
       MYSQL_DATABASE: shopper_db
     ports:
       - "3307:3306"
+    volumes:
+      - ./docker/mysql-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - app_network
 
