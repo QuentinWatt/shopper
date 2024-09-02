@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\api\v1\Products\ShowProductController;
-use App\Http\Controllers\api\v1\products\ShowProductsController;
+use App\Http\Controllers\Api\v1\Products\ShowProductController;
+use App\Http\Controllers\Api\v1\Products\ShowProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
