@@ -2,7 +2,7 @@
 
 use App\Models\Product;
 
-describe('Show Products Test', function () {
+describe('Products Show Test', function () {
     test('it has a products show endpoint', function () {
         $response = $this->getJson('/api/products');
         $response->assertStatus(200);
@@ -15,8 +15,23 @@ describe('Show Products Test', function () {
         expect($content)->toBeJson();
     });
 
+    test('it returns an empty array with no data', function () {
+        $response = $this->getJson('/api/products');
+        $response->assertStatus(200);
+        $content = json_decode($response->getContent());
+
+        expect($content)->toHaveProperties([
+            'data',
+            'meta'
+        ]);
+
+        expect($content->data)->toBeArray();
+        expect($content->data)->toHaveLength(0);
+    });
+
     test('it has an array of product results', function () {
         $product = Product::factory()->create([
+            'sku' => 'W314K900',
             'name' => 'Bees wax candle set',
             'description' => 'Organic bees wax candle set of 3.',
         ]);
@@ -27,7 +42,7 @@ describe('Show Products Test', function () {
 
         expect($content->data[0])->toHaveProperties([
             'id' => $product->id,
-            'sku' => $product->sku,
+            'sku' => 'W314K900',
             'name' => 'Bees wax candle set',
             'description' => 'Organic bees wax candle set of 3.'
         ]);

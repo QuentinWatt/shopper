@@ -1,2 +1,6 @@
-CREATE DATABASE
-IF NOT EXISTS shopper_db_test;
+IF NOT EXISTS (SELECT *
+FROM sys.databases
+WHERE name = 'shopper_db_test')
+BEGIN
+  CREATE DATABASE shopper_db_test;
+END

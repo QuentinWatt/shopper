@@ -13,7 +13,5 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        Config::set('database.connections.mysql.database', 'shopper_db_test');
     }
 }
