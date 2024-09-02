@@ -27,7 +27,7 @@ jobs:
 
       - name: Create environmnet files
         run: |
-          cp shopper-be/.env.example shopper-be/.env
+          cp ./shopper-be/.env.example ./shopper-be/.env
 
       - name: Build and run Docker Compose
         run: |
@@ -37,9 +37,11 @@ jobs:
       - name: Check containers are up and running
         run: docker ps -a
 
+      - name: Composer install
+        run: docker compose exec shopper_be composer install
+
       - name: Run Laravel migrations
         run: |
-          docker compose exec shopper_be composer install
           docker compose exec shopper_be php artisan migrate --force
           docker compose exec shopper_be php artisan db:seed
 
