@@ -29,6 +29,8 @@ services:
       MYSQL_DATABASE: shopper_db
     ports:
       - "3307:3306"
+    volumes:
+      - ./docker/mysql-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - app_network
 
