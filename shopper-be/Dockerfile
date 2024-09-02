@@ -25,6 +25,8 @@ RUN apt install -y php8.2-fpm php8.2-cli
 # Install composer
 RUN apt install -y curl
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install
+RUN composer dump-autoload
 
 # Install nginx
 RUN apt install -y nginx
@@ -40,9 +42,6 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html
-
-RUN composer install
-RUN composer dump-autoload
 
 EXPOSE 80
 
