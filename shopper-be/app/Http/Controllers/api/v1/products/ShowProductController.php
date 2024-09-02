@@ -12,7 +12,7 @@ class ShowProductController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, Product $product)
+    public function __invoke(Request $request, Product $product): ProductResource
     {
         return new ProductResource($product);
     }
