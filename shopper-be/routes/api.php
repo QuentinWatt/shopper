@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\LogoutController;
 use App\Http\Controllers\Api\v1\Products\ShowProductController;
 use App\Http\Controllers\Api\v1\Products\ShowProductsController;
+use App\Http\Controllers\Products\CreateProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,8 @@ Route::get('/user', function (Request $request) {
 Route::prefix('/products')->group(function () {
     Route::get('/', ShowProductsController::class);
     Route::get('/{product}', ShowProductController::class);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/', CreateProductController::class);
+    });
 });
