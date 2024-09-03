@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  setup:
-    name: Setup Environment
+  test:
+    name: Backend CI
     runs-on: ubuntu-latest
 
     services:
@@ -25,7 +25,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Create environment files
+      - name: Create environmnet files
         run: |
           cp ./shopper-be/.env.example ./shopper-be/.env
 
@@ -37,76 +37,13 @@ jobs:
       - name: Check containers are up and running
         run: docker ps -a
 
-  install:
-    name: Install Dependencies
-    runs-on: ubuntu-latest
-    needs: setup
-
-    services:
-      docker:
-        image: docker:stable
-        options: --privileged
-        ports:
-          - 8000:80
-          - 3307:3306
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Start Docker Compose
-        run: |
-          docker compose -f docker-compose.prod.yml up -d
-
       - name: Composer install
         run: docker compose exec shopper_be composer install
-
-  migrate:
-    name: Run Migrations
-    runs-on: ubuntu-latest
-    needs: install
-
-    services:
-      docker:
-        image: docker:stable
-        options: --privileged
-        ports:
-          - 8000:80
-          - 3307:3306
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Start Docker Compose
-        run: |
-          docker compose -f docker-compose.prod.yml up -d
 
       - name: Run Laravel migrations
         run: |
           docker compose exec shopper_be php artisan migrate --force
           docker compose exec shopper_be php artisan db:seed
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: migrate
-
-    services:
-      docker:
-        image: docker:stable
-        options: --privileged
-        ports:
-          - 8000:80
-          - 3307:3306
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Start Docker Compose
-        run: |
-          docker compose -f docker-compose.prod.yml up -d
 
       - name: Run Laravel tests
         run: docker compose exec shopper_be php artisan test
