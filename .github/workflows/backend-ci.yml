@@ -37,8 +37,8 @@ jobs:
       # - name: Check containers are up and running
       #   run: docker ps -a
 
-      # - name: Composer install
-      #   run: docker compose exec shopper_be composer install
+      - name: Composer install
+        run: docker compose exec shopper_be composer install
 
       - name: Run Laravel migrations
         run: |

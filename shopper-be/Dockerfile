@@ -36,9 +36,6 @@ RUN apt-get install -y default-mysql-client \
 
 COPY start.sh /start.sh
 
-RUN composer install
-RUN composer dump-autoload
-
 COPY . /var/www/html
 WORKDIR /var/www/html
 
