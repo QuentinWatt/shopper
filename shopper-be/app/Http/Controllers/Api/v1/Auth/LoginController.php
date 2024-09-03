@@ -3,27 +3,27 @@
 namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\TokenRequest;
 use App\Http\Resources\v1\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class CreateTokenController extends Controller
+class LoginController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(TokenRequest $request)
     {
         $user = User::where('email', $request->input(['email']))->first();
 
         if (!$user) {
             throw ValidationException::withMessages([
-                'email' => ['We couldn\'t find an account with that email address.'],
+                'email' => ['Could not find a user with that email/password combination.'],
             ]);
         }
 
         if (!Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => ['Could not find a user with that email/password combination.'],
             ]);
         }
 

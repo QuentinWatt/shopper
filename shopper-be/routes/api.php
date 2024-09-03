@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\v1\Auth\CreateTokenController;
+use App\Http\Controllers\Api\v1\Auth\LoginController;
+use App\Http\Controllers\Api\v1\Auth\LogoutController;
 use App\Http\Controllers\Api\v1\Products\ShowProductController;
 use App\Http\Controllers\Api\v1\Products\ShowProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
-    Route::post('token', CreateTokenController::class);
+    Route::post('login', LoginController::class);
+    Route::middleware('auth:sanctum')->post('logout', LogoutController::class);
 });
 
 Route::get('/user', function (Request $request) {
