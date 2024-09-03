@@ -36,13 +36,13 @@ RUN apt-get install -y default-mysql-client \
 
 COPY start.sh /start.sh
 
+RUN composer install
+RUN composer dump-autoload
+
 COPY . /var/www/html
 WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html
-
-RUN composer install
-RUN composer dump-autoload
 
 EXPOSE 80
 
