@@ -1,5 +1,5 @@
-<?
+<?php
 
-it('example', function () {
-  $this->assertNotEquals(true, false);
+test('that true is true', function () {
+  expect(true)->toBeTrue();
 });
