@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import HomeView from "../views/HomeView";
-import ProductView from "../views/ProductsView";
+import ProductView from "../views/Products/ProductsView";
 import NotFound from "../views/NotFound";
 
 const routes = createBrowserRouter([
