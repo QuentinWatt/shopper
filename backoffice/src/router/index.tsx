@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import HomeView from "../views/HomeView";
-import ProductView from "../views/ProductsView";
+import ProductsView from "../views/Products/ProductsView";
 import NotFound from "../views/NotFound";
+import ProductView from "../views/Products/ProductView";
 
 const routes = createBrowserRouter([
   {
@@ -14,11 +15,15 @@ const routes = createBrowserRouter([
         element: <HomeView />,
       },
       {
-        path: "/products",
+        path: "products",
+        element: <ProductsView />,
+      },
+      {
+        path: "products/:id",
         element: <ProductView />,
       },
       {
-        path: "/*",
+        path: "*",
         element: <NotFound />,
       },
     ],
