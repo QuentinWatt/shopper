@@ -4,7 +4,7 @@ import Product from "@/models/Product";
 import ProductsList from "@/components/products/ProductsList";
 import fetchProductsRequest from "@/requests/products/fetchProductsRequest";
 
-const ProductView: React.FC = () => {
+const ProductsView: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const ProductView: React.FC = () => {
   );
 };
 
-export default ProductView;
+export default ProductsView;
