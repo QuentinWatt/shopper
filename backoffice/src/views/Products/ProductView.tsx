@@ -5,8 +5,8 @@ const ProductView: React.FC = () => {
   const { id } = useParams();
 
   return (
-    <div className="my-6">
-      <h1 className="font-bold text-2xl">Product Name</h1>
+    <div className="container mx-auto my-6">
+      <h1 className="font-bold text-2xl mb-5">Product Name</h1>
       <div>{id}</div>
     </div>
   );
