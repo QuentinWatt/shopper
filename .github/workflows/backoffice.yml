@@ -17,6 +17,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: CD into directory
+        run: cd ./backoffice
+
       - name: Install PNPM
         run: npm install -g pnpm
 
