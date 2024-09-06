@@ -10,8 +10,7 @@ describe("Navigation", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId("shopper-full-logo")).toBeInTheDocument();
-    expect(screen.getByText(/shopper/i)).toBeInTheDocument();
+    expect(screen.getByTestId("shopper-square-logo")).toBeInTheDocument();
   });
 
   it("Contains the top level links", () => {
