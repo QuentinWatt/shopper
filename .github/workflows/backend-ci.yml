@@ -1,4 +1,4 @@
-name: Backend CI
+name: API
 
 on:
   push:
@@ -33,9 +33,6 @@ jobs:
         run: |
           docker compose -f docker-compose.prod.yml up -d
           sleep 30 # adjust time as needed for containers to start
-
-      # - name: Check containers are up and running
-      #   run: docker ps -a
 
       - name: Composer install
         run: docker compose exec shopper_be composer install

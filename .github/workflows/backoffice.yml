@@ -1,4 +1,4 @@
-name: Backoffice Lint and Test
+name: Backoffice
 
 on:
   push:
