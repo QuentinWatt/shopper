@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface MenuItem {
+  testId: string;
   path: string;
   label: string;
   icon: ReactNode;
@@ -11,11 +12,13 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
+    testId: "dashboard",
     path: "/",
     label: "Dashboard",
     icon: <DashboardIcon width={30} height={30} className="flex-shrink-0" />,
   },
   {
+    testId: "products",
     path: "/products",
     label: "Products",
     icon: <ProductsIcon width={30} height={30} className="flex-shrink-0" />,
@@ -34,8 +37,11 @@ const NavigationMenu: React.FC<{ expanded: boolean }> = ({ expanded }) => {
       {menuItems.map((item) => (
         <li
           key={item.path}
-          className={`hover:border-r-8 border-blue-500 hover:bg-slate-700 ${
-            isActive(item.path) && "bg-slate-700 border-r-8 border-blue-500"
+          data-testid={item.testId}
+          className={`hover:border-r-8 border-blue-500 hover:bg-slate-700${
+            isActive(item.path)
+              ? " bg-slate-700 border-r-8 border-blue-500"
+              : ""
           }`}
         >
           <Link to={item.path} className="flex p-3 items-center">
