@@ -17,17 +17,17 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: CD into directory
-        run: cd ./backoffice
-
       - name: Install PNPM
         run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
+        working-directory: ./backoffice
 
-      - name: Run tests
+      - name: Run linter
         run: pnpm lint
+        working-directory: ./backoffice
 
       - name: Run tests
         run: pnpm run test
+        working-directory: ./backoffice
