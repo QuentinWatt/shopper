@@ -1,4 +1,4 @@
-name: Backoffice
+name: Backoffice Lint and Test
 
 on:
   push:
@@ -9,25 +9,41 @@ on:
       - main
 
 jobs:
-  test:
-    name: Backoffice
+  lint:
+    name: Linting
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Install PNPM
+      - name: Install PNPM globally
         run: npm install -g pnpm
 
-      - name: Install dependencies
+      - name: Install dependencies in Backoffice
         run: pnpm install
         working-directory: ./backoffice
 
-      - name: Run linter
+      - name: Run linter in Backoffice
         run: pnpm lint
         working-directory: ./backoffice
 
-      - name: Run tests
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    needs: lint # This ensures testing only runs after linting is successful
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install PNPM globally
+        run: npm install -g pnpm
+
+      - name: Install dependencies in Backoffice
+        run: pnpm install
+        working-directory: ./backoffice
+
+      - name: Run tests in Backoffice
         run: pnpm run test
         working-directory: ./backoffice
