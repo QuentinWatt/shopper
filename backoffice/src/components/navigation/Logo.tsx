@@ -6,8 +6,9 @@ const Logo: React.FC<{
   height?: number;
 }> = ({ width = 32, height = 32 }) => {
   return (
-    <Link to="/" className="flex items-center">
+    <Link to="/" data-testid="shopper-full-logo" className="flex items-center">
       <svg
+        data-testid="shopper-square-logo"
         width={width}
         height={height}
         viewBox="0 0 36 36"
