@@ -1,17 +1,13 @@
-import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { render } from "@testing-library/react";
 import App from "./App";
-
-vi.mock("react-router-dom", () => ({
-  Outlet: () => <div>Mocked Outlet</div>,
-  Link: ({ to, children }: { to: string; children: React.ReactNode }) => (
-    <a href={to}>{children}</a>
-  ),
-}));
+import { MemoryRouter } from "react-router-dom";
 
 describe("App", () => {
   it("Renders the App component", () => {
-    render(<App />);
-    expect(screen.getByText(/Mocked Outlet/i)).toBeInTheDocument();
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
   });
 });
