@@ -4,6 +4,7 @@ import "@testing-library/jest-dom/vitest";
 import "./mocks/axios.mock";
 import "./mocks/shopperApi.mock";
 import "./mocks/requests/fetchProductsRequest.mock";
+import "./mocks/requests/fetchProductRequest.mock";
 
 // Clean up after tests
 afterEach(() => {

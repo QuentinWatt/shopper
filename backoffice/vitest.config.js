@@ -24,6 +24,8 @@ export default defineConfig({
       'src/models/**',
       'src/**/*.test.tsx',
       'src/**/*.spec.tsx',
+      '**/tests/**',
+      '**/tests/mocks/**'
     ],
     }
   },
