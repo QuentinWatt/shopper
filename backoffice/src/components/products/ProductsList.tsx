@@ -1,6 +1,6 @@
 import { displayPrice } from "@/helpers/currency";
 import Product from "@/models/Product";
-import ProductsContext from "@/views/Products/ProductsContext";
+import ProductsContext from "@/providers/products/ProductsContext";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 

@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
-import ProductsContext from "./ProductsContext";
-import Product from "@/models/Product";
+import React from "react";
 import ProductsList from "@/components/products/ProductsList";
-import fetchProductsRequest from "@/requests/products/fetchProductsRequest";
+import ProductsProvider from "@/providers/products/ProductsProvider";
 
 const ProductsView: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setProducts(await fetchProductsRequest());
-    };
-
-    fetchProducts();
-  }, []);
-
   return (
-    <ProductsContext.Provider value={{ products, setProducts }}>
+    <ProductsProvider>
       <div className="container mx-auto py-6">
-        <h1 className="font-bold mb-5 text-2xl">Products Page</h1>
+        <h1 className="font-bold mb-5 text-2xl">Products</h1>
 
         <ProductsList />
       </div>
-    </ProductsContext.Provider>
+    </ProductsProvider>
   );
 };
 

@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <div className="h-screen flex bg-gray-200 overflow-hidden">
       <Navigation />
-      <div className="px-5 w-full h-screen overflow-x-auto">
+      <div className="px-5 h-screen overflow-x-auto w-full">
         <main>
           <Outlet />
         </main>
