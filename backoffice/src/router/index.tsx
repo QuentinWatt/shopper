@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import HomeView from "../views/HomeView";
 import ProductsView from "../views/Products/ProductsView";
+import ProductEditView from "../views/Products/ProductEditView";
 import NotFound from "../views/NotFound";
-import ProductView from "../views/Products/ProductView";
 
 const routes = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "products/:id",
-        element: <ProductView />,
+        element: <ProductEditView />,
       },
       {
         path: "*",

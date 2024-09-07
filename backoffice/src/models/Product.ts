@@ -4,6 +4,6 @@ export default interface Product {
   name: string;
   description: string;
   price_cents: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
 }
