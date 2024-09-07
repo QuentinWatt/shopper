@@ -7,6 +7,7 @@ const ProductEditProvider: React.FC<{
   productId: number;
   children?: ReactNode;
 }> = ({ productId, children }) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -19,7 +20,9 @@ const ProductEditProvider: React.FC<{
   }, [productId]);
 
   return (
-    <ProductEditContext.Provider value={{ product, setProduct }}>
+    <ProductEditContext.Provider
+      value={{ product, setProduct, isLoading, setLoading }}
+    >
       {children}
     </ProductEditContext.Provider>
   );
