@@ -11,13 +11,19 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './tests/setup.ts',
-    exclude: [
+    coverage: {
+      exclude: [
       '**/node_modules/**',  
       '**/dist/**',          
       '**/config/**',  
       '**/*.config.js',      
       '**/*.config.ts',
-      './src/icons/**',
+      '**/*.d.ts',
+      'src/icons/**',
+      'src/clients/**',
+      'src/**/*.test.tsx',
+      'src/**/*.spec.tsx',
     ],
+    }
   },
 })
