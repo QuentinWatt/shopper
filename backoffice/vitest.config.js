@@ -21,6 +21,7 @@ export default defineConfig({
       '**/*.d.ts',
       'src/icons/**',
       'src/clients/**',
+      'src/models/**',
       'src/**/*.test.tsx',
       'src/**/*.spec.tsx',
     ],
