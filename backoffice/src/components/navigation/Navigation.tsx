@@ -10,7 +10,7 @@ const Navigation: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <div className="relative h-screen">
+    <aside className="relative h-screen">
       <div className="absolute right-0 top-14 translate-x-3 z-50 text-white">
         <button
           data-testid="menu-expand-button"
@@ -33,7 +33,7 @@ const Navigation: React.FC = () => {
           <Menu expanded={expanded} />
         </div>
       </nav>
-    </div>
+    </aside>
   );
 };
 
