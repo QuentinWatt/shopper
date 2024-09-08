@@ -1,19 +1,20 @@
-import React from "react";
-import Navigation from "./components/navigation/Navigation";
-import Footer from "./components/footer/Footer";
+import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
+import AuthContext from "./providers/auth/AuthContext";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import GuestLayout from "./layouts/GuestLayout";
 
 const App: React.FC = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+
+  if (!isLoggedIn()) {
+    return <GuestLayout />;
+  }
+
   return (
-    <div className="h-screen flex bg-gray-200 overflow-hidden">
-      <Navigation />
-      <div className="px-5 h-screen overflow-x-auto min-w-[calc(100vw-4rem)]">
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </div>
+    <AuthenticatedLayout>
+      <Outlet />
+    </AuthenticatedLayout>
   );
 };
 

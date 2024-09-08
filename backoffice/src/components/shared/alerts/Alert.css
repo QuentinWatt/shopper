@@ -1,0 +1,5 @@
+@layer components {
+  .alert {
+    @apply bg-slate-300 rounded p-3 flex;
+  }
+}

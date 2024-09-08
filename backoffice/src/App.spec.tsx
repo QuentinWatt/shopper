@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 describe("App", () => {
   it("Renders the App component", () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter>
     );

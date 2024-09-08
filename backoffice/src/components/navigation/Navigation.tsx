@@ -10,14 +10,18 @@ const Navigation: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <div className="relative h-screen">
+    <aside className="relative h-screen">
       <div className="absolute right-0 top-14 translate-x-3 z-50 text-white">
         <button
           data-testid="menu-expand-button"
           onClick={() => setExpanded(!expanded)}
           className="rounded-full bg-slate-800 hover:bg-blue-600 w-8 h-8 border border-slate-950 flex items-center justify-center transition-all duration-200"
         >
-          {!expanded ? <CaretRightIcon /> : <CaretLeftIcon />}
+          {!expanded ? (
+            <CaretRightIcon className="flex-shrink-0" />
+          ) : (
+            <CaretLeftIcon className="flex-shrink-0" />
+          )}
         </button>
       </div>
       <nav
@@ -33,7 +37,7 @@ const Navigation: React.FC = () => {
           <Menu expanded={expanded} />
         </div>
       </nav>
-    </div>
+    </aside>
   );
 };
 
