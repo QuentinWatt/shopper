@@ -42,8 +42,8 @@ const loginRequest = async ({
   }
 
   return {
-    user: responseData?.token,
-    token: responseData?.user,
+    user: responseData?.user,
+    token: responseData?.token,
     error: responseError,
   };
 };

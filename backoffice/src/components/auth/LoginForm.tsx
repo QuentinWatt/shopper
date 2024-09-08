@@ -1,12 +1,12 @@
 import React, { FormEvent, useContext, useState } from "react";
 import TextInput from "@/components/shared/inputs/TextInput";
-import Loader from "@/components/shared/loader/Loader";
 import Button from "@/components/shared/Button";
 import PasswordInput from "@/components/shared/inputs/PasswordInput";
 import loginRequest from "@/requests/auth/loginRequest";
 import AuthContext from "@/providers/auth/AuthContext";
 import BaseErrorResponse from "@/models/responses/BaseErrorResponse";
 import Alert from "@/components/shared/alerts/Alert";
+import { storeCookie } from "@/helpers/cookies";
 
 const LoginForm: React.FC = () => {
   const { setUser, setToken } = useContext(AuthContext);
@@ -20,11 +20,14 @@ const LoginForm: React.FC = () => {
 
   const handleSubmission = async (event: FormEvent) => {
     event.preventDefault();
-    setLoading(false);
+    setLoading(true);
     const { user, token, error } = await loginRequest({ email, password });
+    setLoading(false);
     if (!error) {
       setUser(user!);
       setToken(token!);
+      storeCookie("token", token!);
+      storeCookie("user", JSON.stringify(user)!);
     } else {
       setResponseError(error);
     }
@@ -59,11 +62,11 @@ const LoginForm: React.FC = () => {
             />
           </div>
           <div>
-            <Button className="flex justify-between items-center">
+            <Button
+              loading={isloading}
+              className="flex justify-between items-center"
+            >
               Login
-              {isloading && (
-                <Loader color="#fff" className="ml-2" width={18} height={18} />
-              )}
             </Button>
           </div>
         </form>
