@@ -1,32 +1,50 @@
 import { shopperApi } from "@/clients/shopperApi";
+import BaseErrorResponse from "@/models/responses/BaseErrorResponse";
 import User from "@/models/User";
+import { AxiosError } from "axios";
 
 type loginCredentials = {
   email: string;
   password: string;
 };
 
+type loginResponse = {
+  user?: User;
+  token?: string;
+  error?: BaseErrorResponse;
+};
+
 const loginRequest = async ({
   email,
   password,
-}: loginCredentials): Promise<{ user: User | null; token: string | null }> => {
-  let token: string | null = null;
-  let user: User | null = null;
+}: loginCredentials): Promise<loginResponse> => {
+  let responseData;
+  let responseError;
 
   try {
     const response = await shopperApi.post("/auth/login", {
       email,
       password,
     });
-    token = response.data.data.token ?? null;
-    user = response.data.data.user ?? null;
+
+    responseData = response.data.data;
   } catch (error: unknown) {
-    console.log(error);
+    if (error instanceof AxiosError && error.response) {
+      responseError = {
+        message: error.response?.data.message,
+        response: error.response?.data,
+      };
+    } else {
+      responseError = {
+        message: "An unknown error occurred.",
+      };
+    }
   }
 
   return {
-    user,
-    token,
+    user: responseData?.token,
+    token: responseData?.user,
+    error: responseError,
   };
 };
 

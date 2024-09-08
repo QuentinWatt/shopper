@@ -17,7 +17,11 @@ const Navigation: React.FC = () => {
           onClick={() => setExpanded(!expanded)}
           className="rounded-full bg-slate-800 hover:bg-blue-600 w-8 h-8 border border-slate-950 flex items-center justify-center transition-all duration-200"
         >
-          {!expanded ? <CaretRightIcon /> : <CaretLeftIcon />}
+          {!expanded ? (
+            <CaretRightIcon className="flex-shrink-0" />
+          ) : (
+            <CaretLeftIcon className="flex-shrink-0" />
+          )}
         </button>
       </div>
       <nav

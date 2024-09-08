@@ -1,10 +1,12 @@
 import React, { FormEvent, useContext, useState } from "react";
-import TextInput from "../shared/inputs/TextInput";
-import Loader from "../shared/loader/Loader";
-import Button from "../shared/Button";
-import PasswordInput from "../shared/inputs/PasswordInput";
+import TextInput from "@/components/shared/inputs/TextInput";
+import Loader from "@/components/shared/loader/Loader";
+import Button from "@/components/shared/Button";
+import PasswordInput from "@/components/shared/inputs/PasswordInput";
 import loginRequest from "@/requests/auth/loginRequest";
 import AuthContext from "@/providers/auth/AuthContext";
+import BaseErrorResponse from "@/models/responses/BaseErrorResponse";
+import Alert from "@/components/shared/alerts/Alert";
 
 const LoginForm: React.FC = () => {
   const { setUser, setToken } = useContext(AuthContext);
@@ -12,13 +14,20 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isloading, setLoading] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<BaseErrorResponse | null>(
+    null
+  );
 
   const handleSubmission = async (event: FormEvent) => {
     event.preventDefault();
     setLoading(false);
-    const { user, token } = await loginRequest({ email, password });
-    setUser(user);
-    setToken(token);
+    const { user, token, error } = await loginRequest({ email, password });
+    if (!error) {
+      setUser(user!);
+      setToken(token!);
+    } else {
+      setResponseError(error);
+    }
   };
 
   return (
@@ -26,6 +35,11 @@ const LoginForm: React.FC = () => {
       <div className="w-full border border-gray-300 rounded bg-white p-5">
         <h1 className="font-bold text-2xl mb-5 text-center">Login</h1>
         <form onSubmit={(e) => handleSubmission(e)}>
+          {responseError?.message && (
+            <Alert className="bg-red-300 text-red-950">
+              {responseError.message}
+            </Alert>
+          )}
           <div className="my-3">
             <TextInput
               id="email"
