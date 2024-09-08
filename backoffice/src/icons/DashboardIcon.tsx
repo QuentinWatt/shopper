@@ -11,7 +11,7 @@ const DashboardIcon: React.FC<IconProps> = ({
     <svg
       width={width}
       height={height}
-      className={`fill-current ${className}`}
+      className={className}
       onClick={onClick}
       clipRule="evenodd"
       fillRule="evenodd"

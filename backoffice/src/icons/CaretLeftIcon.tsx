@@ -5,19 +5,13 @@ const CaretLeftIcon: React.FC<IconProps> = ({
   height = 24,
   onClick = () => {},
   className = "",
-  defaultClasses = ["fill-current"],
 }) => {
-  const classString = `${className}`
-    .split(" ")
-    .concat(defaultClasses)
-    .join(" ");
-
   return (
     <svg
       width={width}
       height={height}
       onClick={onClick}
-      className={classString}
+      className={className}
       clipRule="evenodd"
       fillRule="evenodd"
       strokeLinejoin="round"

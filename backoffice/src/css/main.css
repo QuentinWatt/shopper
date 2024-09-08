@@ -1,0 +1,11 @@
+/** base */
+@import "tailwindcss/base";
+@import "base.css";
+
+/** components */
+@import "tailwindcss/components";
+@import "../components/shared/Button.css";
+@import "../components/shared/Loader/Loader.css";
+
+/** utils */
+@import "tailwindcss/utilities";
