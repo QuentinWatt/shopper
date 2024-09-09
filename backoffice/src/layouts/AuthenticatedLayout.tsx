@@ -8,7 +8,7 @@ const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   return (
     <div className="h-screen flex bg-gray-200 overflow-hidden">
       <Navigation />
-      <div className="px-5 h-screen overflow-x-auto min-w-[calc(100vw-4rem)]">
+      <div className="px-5 h-screen overflow-x-auto min-w-[calc(100vw-4rem)] md:min-w-[0] w-full">
         <main>{children}</main>
         <Footer />
       </div>
