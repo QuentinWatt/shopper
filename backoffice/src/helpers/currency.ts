@@ -1,7 +1,7 @@
 export const displayPrice = (
   priceInCents: string,
   decimals: number = 2,
-  symbol: string = "$",
+  symbol: string | null = null,
   separator: string = "."
 ) => {
   const units = priceInCents.substring(0, priceInCents.length - decimals);
@@ -9,5 +9,5 @@ export const displayPrice = (
     priceInCents.length - decimals,
     decimals
   );
-  return `${symbol} ${units}${separator}${cents}`;
+  return `${symbol ? `${symbol} ` : ""}${units}${separator}${cents}`;
 };

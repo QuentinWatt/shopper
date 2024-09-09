@@ -22,6 +22,7 @@ const ProductEditProvider: React.FC<{
   return (
     <ProductEditContext.Provider
       value={{ product, setProduct, isLoading, setLoading }}
+      key={product?.id ?? 0}
     >
       {children}
     </ProductEditContext.Provider>

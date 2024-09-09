@@ -1,6 +1,6 @@
+import React from "react";
 import ProductEditForm from "@/components/products/ProductEditForm";
 import ProductEditProvider from "@/providers/products/ProductEditProvider";
-import React from "react";
 import { useParams } from "react-router-dom";
 
 const ProductEditView: React.FC = () => {

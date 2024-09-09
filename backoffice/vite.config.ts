@@ -9,8 +9,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src/"),
     },
   },
-  server: {
-    host: "shopper.test",
-    port: 5000, // or any other port
-  },
 });

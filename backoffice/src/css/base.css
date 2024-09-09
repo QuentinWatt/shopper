@@ -4,6 +4,10 @@
   }
 
   input {
-    @apply border w-full px-3 py-2;
+    @apply border w-full px-3 py-2 rounded-lg;
+  }
+
+  textarea {
+    @apply border w-full px-3 py-2 rounded-lg;
   }
 }
