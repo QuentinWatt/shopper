@@ -10,7 +10,7 @@ const GuestLayout: React.FC = () => {
         <LogoFull />
       </header>
       <div>
-        <main>
+        <main className="px-5">
           <LoginForm />
         </main>
       </div>
