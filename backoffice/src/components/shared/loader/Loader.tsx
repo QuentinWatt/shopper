@@ -15,6 +15,7 @@ const Loader: React.FC<{
 }) => {
   return (
     <span
+      data-testid="spinning-loader"
       className={`loader ${className}`}
       style={{
         width: `${width}px`,

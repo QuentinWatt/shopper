@@ -9,10 +9,10 @@ export const shopperApi = axios.create({
   },
 });
 
-export const setToken = (token: string) => {
-  shopperApi.defaults.headers.Authorization = `Bearer ${token}`;
-};
-
-export const unsetToken = () => {
-  shopperApi.defaults.headers.Authorization = "";
+export const setAuthorizationToken = (token: string | null) => {
+  if (token) {
+    shopperApi.defaults.headers.Authorization = `Bearer ${token}`;
+  } else {
+    shopperApi.defaults.headers.Authorization = null;
+  }
 };
