@@ -1,4 +1,5 @@
 import Footer from "@/components/footer/Footer";
+import Header from "@/components/navigation/Header";
 import Navigation from "@/components/navigation/Navigation";
 import React, { ReactNode } from "react";
 
@@ -8,8 +9,9 @@ const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   return (
     <div className="h-screen flex bg-gray-200 overflow-hidden">
       <Navigation />
-      <div className="px-5 h-screen overflow-x-auto min-w-[calc(100vw-4rem)] md:min-w-[0] w-full">
-        <main>{children}</main>
+      <div className="h-screen overflow-x-auto min-w-[calc(100vw-4rem)] md:min-w-[0] w-full">
+        <Header />
+        <main className="px-5">{children}</main>
         <Footer />
       </div>
     </div>
