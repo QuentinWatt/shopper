@@ -15,11 +15,17 @@ const putPostProductRequest = async (
   let responseError: BaseErrorResponse | null = null;
 
   try {
-    const response = await shopperApi.put(`products/${product.id}`, product);
+    const response = await shopperApi.put(`products/${product.id}`, {
+      price: product.price_cents,
+      ...product,
+    });
     newProduct = response.data.data;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      responseError = error;
+      responseError = {
+        message: error.response?.data?.message,
+        response: error.response,
+      };
     } else {
       responseError = { message: "There was an error" };
     }
