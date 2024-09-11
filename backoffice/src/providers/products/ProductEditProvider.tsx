@@ -7,7 +7,7 @@ const ProductEditProvider: React.FC<{
   productId: number;
   children?: ReactNode;
 }> = ({ productId, children }) => {
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isFetching, setFetching] = useState<boolean>(false);
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ProductEditProvider: React.FC<{
 
   return (
     <ProductEditContext.Provider
-      value={{ product, setProduct, isLoading, setLoading }}
+      value={{ product, setProduct, isFetching, setFetching }}
       key={product?.id ?? 0}
     >
       {children}

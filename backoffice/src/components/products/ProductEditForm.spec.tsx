@@ -11,13 +11,13 @@ describe("Product Edit Form", () => {
     sku: "L478",
   };
   const setProduct = vi.fn();
-  const isLoading = false;
-  const setLoading = vi.fn();
+  const isFetching = false;
+  const setFetching = vi.fn();
 
   beforeEach(() => {
     render(
       <ProductEditContext.Provider
-        value={{ product, setProduct, isLoading, setLoading }}
+        value={{ product, setProduct, isFetching, setFetching }}
       >
         <ProductEditForm />
       </ProductEditContext.Provider>

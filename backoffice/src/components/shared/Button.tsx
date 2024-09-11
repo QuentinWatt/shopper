@@ -1,12 +1,14 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Loader from "./loader/Loader";
 
-const Button: React.FC<{
-  children?: ReactNode;
+type ButtonProps = {
+  children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
   loading?: boolean;
-}> = ({ children, loading, ...props }) => {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: React.FC<ButtonProps> = ({ children, loading, ...props }) => {
   return (
     <button {...props} disabled={loading}>
       {loading ? (

@@ -20,6 +20,7 @@ Route::get('/user', function (Request $request) {
 Route::prefix('/products')->group(function () {
     Route::get('/', ShowProductsController::class);
     Route::get('/{product}', ShowProductController::class);
+    Route::put('/{product}', function () {});
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', CreateProductController::class);

@@ -7,6 +7,7 @@
 @import "../components/shared/alerts/Alert.css";
 @import "../components/shared/Button.css";
 @import "../components/shared/Loader/Loader.css";
+@import "../components/shared/layout/Panel.css";
 
 /** utils */
 @import "tailwindcss/utilities";

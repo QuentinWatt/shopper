@@ -8,7 +8,7 @@ const ProductEditView: React.FC = () => {
 
   return (
     <div className="container mx-auto my-6">
-      <h1 className="font-bold text-2xl mb-5">Edit Product</h1>
+      <h1 className="font-bold text-2xl mb-3">Edit Product</h1>
 
       {id !== undefined && (
         <ProductEditProvider productId={Number(id)}>

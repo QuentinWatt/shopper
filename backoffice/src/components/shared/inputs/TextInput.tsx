@@ -22,7 +22,7 @@ const TextInput: React.FC<InputProps> = ({
         type="text"
         placeholder={placeholder}
         name={id}
-        className="rounded"
+        className="rounded-lg"
       />
     </>
   );
