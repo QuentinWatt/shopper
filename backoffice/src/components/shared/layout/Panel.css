@@ -1,0 +1,5 @@
+@layer components {
+  .panel {
+    @apply border border-gray-300 bg-white rounded-lg p-3 mb-3;
+  }
+}

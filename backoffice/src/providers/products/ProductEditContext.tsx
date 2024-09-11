@@ -4,15 +4,15 @@ import { createContext } from "react";
 interface ProductEditContextInterface {
   product: Product | null;
   setProduct: React.Dispatch<React.SetStateAction<Product | null>>;
-  isLoading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isFetching: boolean;
+  setFetching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialState: ProductEditContextInterface = {
   product: null,
-  isLoading: false,
+  isFetching: false,
   setProduct: () => {},
-  setLoading: () => {},
+  setFetching: () => {},
 };
 
 export const ProductEditContext = createContext(initialState);

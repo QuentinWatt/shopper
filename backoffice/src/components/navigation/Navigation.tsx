@@ -25,9 +25,9 @@ const Navigation: React.FC = () => {
         </button>
       </div>
       <nav
-        className={`h-full transition-all duration-200 bg-slate-900 text-white ${
+        className={`h-full transition-all duration-200 bg-slate-900 text-white border-r-1 border-slate-400 ${
           expanded ? `w-72` : `w-16`
-        } overflow-scroll border-r-1 border-slate-400`}
+        }`}
       >
         <div className="container mx-auto flex flex-col">
           <Link to="/" className="pt-5 px-4">

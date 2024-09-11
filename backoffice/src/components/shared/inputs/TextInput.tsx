@@ -3,17 +3,13 @@ import React from "react";
 type InputProps = {
   id: string;
   label: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput: React.FC<InputProps> = ({
   id,
   label,
   placeholder = "",
-  onChange = () => {},
-  value = "",
+  ...props
 }) => {
   return (
     <>
@@ -21,13 +17,12 @@ const TextInput: React.FC<InputProps> = ({
         {label}
       </label>
       <input
+        {...props}
         id={id}
         type="text"
         placeholder={placeholder}
         name={id}
-        value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-        className="rounded"
+        className="rounded-lg"
       />
     </>
   );
