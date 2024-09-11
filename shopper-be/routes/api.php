@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\LogoutController;
+use App\Http\Controllers\Api\v1\Products\DeleteProductController;
 use App\Http\Controllers\Api\v1\Products\EditProductController;
 use App\Http\Controllers\Api\v1\Products\ShowProductController;
 use App\Http\Controllers\Api\v1\Products\ShowProductsController;
@@ -22,6 +23,7 @@ Route::prefix('/products')->group(function () {
     Route::get('/', ShowProductsController::class);
     Route::get('/{product}', ShowProductController::class);
     Route::put('/{product}', EditProductController::class);
+    Route::delete('/{product}', DeleteProductController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', CreateProductController::class);
