@@ -15,6 +15,7 @@ describe("ProfileMenu", () => {
         value={{ user, setUser, token, setToken, isLoggedIn }}
       >
         <ProfileMenu />
+        <span data-testid="outside-element">Some content outside the menu</span>
       </AuthContext.Provider>
     );
   });
@@ -34,23 +35,31 @@ describe("ProfileMenu", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("opens the dropdown menu when clicked", async () => {
+  it("opens the dropdown menu when clicked", () => {
     const profileButton = screen.getByTestId("profile-button");
     fireEvent.click(profileButton);
 
-    await waitFor(() => {
-      expect(screen.queryByTestId("profile-dropdown-menu")).toBeInTheDocument();
-    });
+    expect(screen.queryByTestId("profile-dropdown-menu")).toBeInTheDocument();
   });
 
-  it("contains a logout button when opeen", async () => {
+  it("contains a logout button when open", () => {
     const profileButton = screen.getByTestId("profile-button");
     fireEvent.click(profileButton);
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /logout/i })
-      ).toBeInTheDocument();
-    });
+    expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument();
+  });
+
+  it("closes the profile menu when the user clicks outside the profile menu", () => {
+    const profileButton = screen.getByTestId("profile-button");
+    fireEvent.click(profileButton);
+
+    expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument();
+
+    const outsideElement = screen.getByTestId("outside-element");
+    fireEvent.click(outsideElement);
+
+    expect(
+      screen.queryByRole("button", { name: /logout/i })
+    ).not.toBeInTheDocument();
   });
 });
