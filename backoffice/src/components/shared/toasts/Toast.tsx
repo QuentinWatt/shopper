@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from "React";
+import React, { useEffect, useState, useCallback } from "react";
 import { ToastType } from "./types";
 
 type ToastProps = {
+  id: string;
   message: string;
   type?: ToastType;
   duration?: number;
   className?: string;
-  onClose?: () => void;
+  onClose?: (id: string) => void;
 } & React.HtmlHTMLAttributes<HTMLDivElement>;
 
 type ToastStyles = {
@@ -17,6 +18,7 @@ type ToastStyles = {
 };
 
 const Toast: React.FC<ToastProps> = ({
+  id,
   message,
   type = "info",
   duration = 3000,
@@ -28,29 +30,36 @@ const Toast: React.FC<ToastProps> = ({
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
 
-  // Memoize the close function using useCallback
   const close = useCallback(() => {
-    setIsExiting(true); // Start exit animation
+    setIsExiting(true);
     setTimeout(() => {
       setIsVisible(false);
-      if (onClose) onClose();
-    }, 500); // Delay removing the toast to match the exit animation duration
-  }, [onClose]);
+      if (onClose) onClose(id);
+    }, 500);
+  }, [onClose, id]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => (prev < 100 ? prev + 100 / (duration / 100) : 100));
-    }, 100);
-
-    const timer = setTimeout(() => {
+    const closeTimer = setTimeout(() => {
       close();
     }, duration);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(closeTimer);
   }, [duration, close]);
+
+  useEffect(() => {
+    const intervalDuration = 100;
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const newProgress = Math.min(
+          prev + 100 / (duration / intervalDuration),
+          100
+        );
+        return newProgress;
+      });
+    }, intervalDuration);
+
+    return () => clearInterval(interval);
+  }, [duration]);
 
   if (!isVisible) return null;
 
@@ -65,8 +74,8 @@ const Toast: React.FC<ToastProps> = ({
     <div
       style={{ ...toastStyles[type] }}
       {...props}
-      className={`toast${className ? ` ${className}` : ``}${
-        isExiting ? " toast-exit" : ""
+      className={`toast${isExiting ? " toast-exit" : ""}${
+        className ? ` ${className}` : ``
       }`}
       onClick={close}
     >

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Toast from "./Toast";
 import ToastContext from "./ToastContext";
-import { ToastData, ToastType } from "./types";
+import { ToastData } from "./types";
 
 type ToastProviderProps = {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 };
 
 const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
@@ -12,38 +12,32 @@ const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
 
   const addToast = (
     message: string,
-    type: ToastType = "info",
-    duration: number = 3000
+    type: ToastData["type"] = "info",
+    duration = 3000
   ) => {
     const id = Math.random().toString(36).substring(2, 9);
-    setToasts((prev: ToastData[]) => [
-      ...prev,
-      { id, message, type, duration },
-    ]);
+    setToasts((prev) => [...prev, { id, message, type, duration }]);
   };
 
   const removeToast = (id: string) => {
-    setToasts((prev: ToastData[]) => prev.filter((toast) => toast.id !== id));
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
   return (
-    <ToastContext.Provider
-      value={{ toasts, setToasts, addToast: addToast, removeToast }}
-    >
+    <ToastContext.Provider value={{ toasts, setToasts, addToast, removeToast }}>
       {children}
-      {toasts.length > 0 && (
-        <div className="toast-container">
-          {toasts.map((toast) => (
-            <Toast
-              key={toast.id}
-              message={toast.message}
-              type={toast.type}
-              duration={toast.duration}
-              onClose={() => removeToast(toast.id)}
-            />
-          ))}
-        </div>
-      )}
+      <div className="toast-container">
+        {toasts.map((toast) => (
+          <Toast
+            key={toast.id}
+            id={toast.id}
+            message={toast.message}
+            type={toast.type}
+            duration={toast.duration}
+            onClose={removeToast}
+          />
+        ))}
+      </div>
     </ToastContext.Provider>
   );
 };

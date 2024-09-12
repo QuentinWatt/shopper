@@ -6,9 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      transitionDuration: {
-        '10': '10ms',
-      }
+
     },
   },
   plugins: [],
