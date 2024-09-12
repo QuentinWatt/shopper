@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ProfileMenu from "./ProfileMenu";
 import AuthContext from "@/providers/auth/AuthContext";
 
