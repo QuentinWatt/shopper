@@ -1,0 +1,43 @@
+@layer components {
+  .toast-container {
+    @apply fixed top-5 w-72 left-1/2 -translate-x-1/2;
+  }
+
+  .toast {
+    @apply relative w-full rounded mx-auto text-center p-3 mb-3 overflow-hidden shadow-lg;
+    animation: slideIn 0.5s ease forwards;
+  }
+
+  .toast-exit {
+    animation: slideOut 0.5s ease forwards;
+  }
+
+  .toast-progress {
+    @apply absolute bottom-0 left-0 h-1 bg-slate-900;
+    transition: all 300ms ease;
+  }
+
+  /* Slide in from the top */
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Slide out upwards */
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+  }
+}

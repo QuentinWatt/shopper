@@ -4,6 +4,7 @@ import AuthContext from "./providers/auth/AuthContext";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import { findCookie } from "./helpers/cookies";
+import ToastProvider from "./components/shared/toasts/ToastProvider";
 
 const App: React.FC = () => {
   const { isLoggedIn, setToken, setUser } = useContext(AuthContext);
@@ -11,16 +12,18 @@ const App: React.FC = () => {
   useEffect(() => {
     setToken(findCookie("token"));
     setUser(JSON.parse(findCookie("user")));
-  }, []);
-
-  if (!isLoggedIn()) {
-    return <GuestLayout />;
-  }
+  }, [setToken, setUser]);
 
   return (
-    <AuthenticatedLayout>
-      <Outlet />
-    </AuthenticatedLayout>
+    <ToastProvider>
+      {!isLoggedIn() ? (
+        <GuestLayout />
+      ) : (
+        <AuthenticatedLayout>
+          <Outlet />
+        </AuthenticatedLayout>
+      )}
+    </ToastProvider>
   );
 };
 

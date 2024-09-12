@@ -1,7 +1,7 @@
+import React, { ReactNode } from "react";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/navigation/Header";
 import Navigation from "@/components/navigation/Navigation";
-import React, { ReactNode } from "react";
 
 const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   children,
