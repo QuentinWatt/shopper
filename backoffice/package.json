@@ -9,10 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:report": "vitest --run --coverage"
+    "test:report": "vitest --run --coverage",
+    "prepare": "husky"
   },
   "dependencies": {
-    "husky": "^9.1.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1"
@@ -33,6 +33,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "husky": "^9.1.6",
     "jsdom": "^25.0.0",
     "postcss": "^8.4.44",
     "tailwindcss": "^3.4.10",
