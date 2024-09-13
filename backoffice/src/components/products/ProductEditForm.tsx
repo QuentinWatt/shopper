@@ -8,8 +8,10 @@ import Panel from "../shared/layout/Panel";
 import putPostProductRequest from "@/requests/products/putProductRequest";
 import BaseErrorResponse from "@/models/responses/BaseErrorResponse";
 import Alert from "../shared/alerts/Alert";
+import { useToast } from "../shared/toasts/ToastContext";
 
 const ProductEditForm: React.FC = () => {
+  const { addToast } = useToast();
   const { product, setProduct, isFetching } = useContext(ProductEditContext);
   const [saving, setSaving] = useState<boolean>(false);
   const [error, setError] = useState<BaseErrorResponse | null>(null);
@@ -23,7 +25,6 @@ const ProductEditForm: React.FC = () => {
 
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("test");
     setSaving(true);
     const { product: newProduct, responseError } = await putPostProductRequest({
       id: product!.id,
@@ -33,7 +34,10 @@ const ProductEditForm: React.FC = () => {
       price_cents: price,
     });
     if (!responseError) {
+      addToast("saved!", "success");
       setProduct(newProduct);
+    } else {
+      addToast("There was a problem", "error");
     }
     setError(responseError);
     setSaving(false);
