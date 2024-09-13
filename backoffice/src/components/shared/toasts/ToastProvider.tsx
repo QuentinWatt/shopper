@@ -4,7 +4,7 @@ import ToastContext from "./ToastContext";
 import { ToastData } from "./types";
 
 type ToastProviderProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
@@ -26,18 +26,20 @@ const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   return (
     <ToastContext.Provider value={{ toasts, setToasts, addToast, removeToast }}>
       {children}
-      <div className="toast-container">
-        {toasts.map((toast) => (
-          <Toast
-            key={toast.id}
-            id={toast.id}
-            message={toast.message}
-            type={toast.type}
-            duration={toast.duration}
-            onClose={removeToast}
-          />
-        ))}
-      </div>
+      {toasts.length > 0 && (
+        <div className="toast-container">
+          {toasts.map((toast) => (
+            <Toast
+              key={toast.id}
+              id={toast.id}
+              message={toast.message}
+              type={toast.type}
+              duration={toast.duration}
+              onClose={removeToast}
+            />
+          ))}
+        </div>
+      )}
     </ToastContext.Provider>
   );
 };

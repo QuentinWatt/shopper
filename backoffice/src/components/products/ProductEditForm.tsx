@@ -34,10 +34,10 @@ const ProductEditForm: React.FC = () => {
       price_cents: price,
     });
     if (!responseError) {
-      addToast("success");
+      addToast("saved!", "success");
       setProduct(newProduct);
     } else {
-      addToast("error");
+      addToast("There was a problem", "error");
     }
     setError(responseError);
     setSaving(false);

@@ -38,13 +38,15 @@ const Toast: React.FC<ToastProps> = ({
     }, 500);
   }, [onClose, id]);
 
-  useEffect(() => {
-    const closeTimer = setTimeout(() => {
-      close();
-    }, duration);
+  const closeTimer = setTimeout(() => {
+    close();
+  }, duration);
 
-    return () => clearTimeout(closeTimer);
-  }, [duration, close]);
+  useEffect(() => {
+    return () => {
+      clearTimeout(closeTimer);
+    };
+  }, [closeTimer]);
 
   useEffect(() => {
     const intervalDuration = 100;
