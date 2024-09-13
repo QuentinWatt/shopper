@@ -40,7 +40,9 @@ describe("ToastProvider", () => {
     const toast = screen.getByText(/test toast/i);
     await waitFor(async () => {
       expect(toast).toBeInTheDocument();
+      expect(toast).not.toHaveClass("toast-exit");
       fireEvent.click(toast);
+      expect(toast).toHaveClass("toast-exit");
 
       await waitFor(() => {
         expect(toast).not.toBeInTheDocument();

@@ -4,7 +4,7 @@
   }
 
   .toast {
-    @apply relative w-full rounded mx-auto text-center p-3 mb-3 overflow-hidden shadow-lg;
+    @apply relative w-full rounded mx-auto text-center p-3 pb-5 mb-3 overflow-hidden shadow-lg;
     animation: bounceIn 0.5s linear forwards;
   }
 
@@ -14,7 +14,27 @@
 
   .toast-progress {
     @apply absolute bottom-0 left-0 h-1 bg-slate-900;
+    @apply bg-white opacity-80;
     transition: all 300ms ease;
+  }
+
+  .toast.info {
+    @apply bg-blue-400 text-white;
+  }
+  .toast.info .toast-progress {
+    @apply bg-white opacity-80;
+  }
+
+  .toast.success {
+    @apply bg-green-400 text-white;
+  }
+
+  .toast.error {
+    @apply bg-red-400 text-white;
+  }
+
+  .toast.warning {
+    @apply bg-orange-400 text-white;
   }
 
   /* Slide in from the top */
