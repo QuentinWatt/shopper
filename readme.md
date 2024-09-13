@@ -7,7 +7,7 @@ This Shopper repostiory is a demonstration of how multiple front ends can intera
 - Docker
 - Laravel
 - React JS
-- Next JS
+- Next JS (to be added soon)
 
 ## Get Started
 
@@ -44,15 +44,23 @@ To make this easy there is an `init.sh` file located in the `shopper-be` directo
 Intended to be run from the project root folder.
 
 ```
-cd shopper-be && chmod +x ./init.sh && ./init.sh
+cd shopper-be
 ```
 
-### Initialize the backoffice
+```
+chmod +x ./init.sh && ./init.sh
+```
+
+### Initialize the Backoffice React SPA
 
 To make this easy there is an `init.sh` file located in the `backoffice` directory.
 
 Intended to be run from the project root folder.
 
 ```
-cd backoffice && chmod +x ./init.sh && ./init.sh
+cd backoffice
+```
+
+```
+chmod +x ./init.sh && ./init.sh
 ```
