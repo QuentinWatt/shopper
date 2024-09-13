@@ -5,8 +5,8 @@ const fetchProductsRequest = async () => {
   try {
     const response = await shopperApi.get("/products");
     products = response.data.data;
-  } catch (error: unknown) {
-    console.log(error);
+  } catch {
+    // console.log(error);
   }
 
   return products;
