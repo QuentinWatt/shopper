@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      husky:
-        specifier: ^9.1.6
-        version: 9.1.6
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1080,11 +1077,6 @@ packages:
   human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
-
-  husky@9.1.6:
-    resolution: {integrity: sha512-sqbjZKK7kf44hfdE94EoX8MZNk0n7HeW37O4YrVGCF4wzgQjp+akPAkfUK5LZ6KuR/6sqeAVuXHji+RzQgOn5A==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
@@ -2877,8 +2869,6 @@ snapshots:
       - supports-color
 
   human-signals@5.0.0: {}
-
-  husky@9.1.6: {}
 
   iconv-lite@0.6.3:
     dependencies:
