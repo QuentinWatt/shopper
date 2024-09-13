@@ -2,6 +2,7 @@ import React, { FormEvent, useContext, useState } from "react";
 import Button from "../shared/Button";
 import { shopperApi } from "@/clients/shopperApi";
 import AuthContext from "@/providers/auth/AuthContext";
+import { clearCookie } from "@/helpers/cookies";
 
 const LogoutButton: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,11 +13,12 @@ const LogoutButton: React.FC = () => {
     setLoading(true);
     try {
       await shopperApi.post("auth/logout");
-      setToken(null);
-      setUser(null);
     } catch {
       //
     } finally {
+      clearCookie("token");
+      setToken(null);
+      setUser(null);
       setLoading(true);
     }
   };
