@@ -7,7 +7,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  const isLoggedIn = (): boolean => token !== null || user !== null;
+  const isLoggedIn = (): boolean => token !== null;
 
   useEffect(() => {
     setAuthorizationToken(token);
