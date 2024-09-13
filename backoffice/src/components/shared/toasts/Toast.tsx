@@ -10,13 +10,6 @@ type ToastProps = {
   onClose?: (id: string) => void;
 } & React.HtmlHTMLAttributes<HTMLDivElement>;
 
-type ToastStyles = {
-  [key in ToastType]: {
-    backgroundColor: string;
-    color: string;
-  };
-};
-
 const Toast: React.FC<ToastProps> = ({
   id,
   message,
@@ -50,11 +43,13 @@ const Toast: React.FC<ToastProps> = ({
 
   useEffect(() => {
     const intervalDuration = 100;
+    setProgress(100);
+
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const newProgress = Math.min(
-          prev + 100 / (duration / intervalDuration),
-          100
+        const newProgress = Math.max(
+          prev - 100 / (duration / intervalDuration),
+          0
         );
         return newProgress;
       });
@@ -65,18 +60,10 @@ const Toast: React.FC<ToastProps> = ({
 
   if (!isVisible) return null;
 
-  const toastStyles: ToastStyles = {
-    info: { backgroundColor: "#2196F3", color: "#fff" },
-    success: { backgroundColor: "#4CAF50", color: "#fff" },
-    warning: { backgroundColor: "#FF9800", color: "#fff" },
-    error: { backgroundColor: "#F44336", color: "#fff" },
-  };
-
   return (
     <div
-      style={{ ...toastStyles[type] }}
       {...props}
-      className={`toast${isExiting ? " toast-exit" : ""}${
+      className={`toast ${type}${isExiting ? " toast-exit" : ""}${
         className ? ` ${className}` : ``
       }`}
       onClick={close}

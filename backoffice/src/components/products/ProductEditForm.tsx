@@ -99,11 +99,13 @@ const ProductEditForm: React.FC = () => {
           </div>
         </div>
       </Panel>
-      <Panel className="mb-3 order-1 md:order-2">
-        <Button type="submit" loading={saving} className="w-full">
-          Save
-        </Button>
-      </Panel>
+      <div className="mb-3 order-1 md:order-2">
+        <Panel>
+          <Button type="submit" loading={saving} className="w-full">
+            Save
+          </Button>
+        </Panel>
+      </div>
     </form>
   );
 };
