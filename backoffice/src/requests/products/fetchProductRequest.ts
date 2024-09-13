@@ -9,8 +9,8 @@ const fetchProductRequest = async (
   try {
     const response = await shopperApi.get(`/products/${id}`);
     product = response.data.data;
-  } catch (error: unknown) {
-    console.log(error);
+  } catch {
+    // console.log(error);
   }
 
   return {
