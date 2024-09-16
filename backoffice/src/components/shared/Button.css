@@ -1,6 +1,6 @@
 @layer components {
   button {
-    @apply bg-slate-800 hover:bg-slate-950 text-white px-3 py-2 rounded-full;
+    @apply bg-slate-800 hover:bg-slate-950 text-white px-3 py-2 rounded-full flex items-center justify-center;
   }
 
   button:disabled {
