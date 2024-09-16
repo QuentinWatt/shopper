@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { ToastType } from "./types";
 
 type ToastProps = {
@@ -20,8 +20,13 @@ const Toast: React.FC<ToastProps> = ({
   ...props
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(100);
   const [isExiting, setIsExiting] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [remainingTime, setRemainingTime] = useState<number>(duration);
+  const endTimeRef = useRef<number | null>(null);
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const close = useCallback(() => {
     setIsExiting(true);
@@ -29,34 +34,46 @@ const Toast: React.FC<ToastProps> = ({
       setIsVisible(false);
       if (onClose) onClose(id);
     }, 500);
-  }, [onClose, id]);
+  }, [id, onClose]);
 
-  const closeTimer = setTimeout(() => {
-    close();
-  }, duration);
+  const startCountdown = useCallback(() => {
+    const endTime = Date.now() + remainingTime;
+    endTimeRef.current = endTime;
+
+    intervalRef.current = setInterval(() => {
+      const now = Date.now();
+      const newRemainingTime = Math.max(endTime - now, 0);
+      const newProgress = (newRemainingTime / duration) * 100;
+      setProgress(newProgress);
+
+      if (newRemainingTime <= 0) {
+        clearInterval(intervalRef.current!);
+        close();
+      }
+    }, 100);
+  }, [remainingTime, duration, close]);
 
   useEffect(() => {
-    return () => {
-      clearTimeout(closeTimer);
-    };
-  }, [closeTimer]);
+    if (!isPaused) {
+      startCountdown();
+    }
 
-  useEffect(() => {
-    const intervalDuration = 100;
-    setProgress(100);
+    return () => clearInterval(intervalRef.current!);
+  }, [isPaused, startCountdown]);
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        const newProgress = Math.max(
-          prev - 100 / (duration / intervalDuration),
-          0
-        );
-        return newProgress;
-      });
-    }, intervalDuration);
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    if (endTimeRef.current) {
+      setRemainingTime(endTimeRef.current - Date.now());
+    }
+  };
 
-    return () => clearInterval(interval);
-  }, [duration]);
+  const handleMouseLeave = () => {
+    setIsPaused(false);
+  };
 
   if (!isVisible) return null;
 
@@ -66,6 +83,8 @@ const Toast: React.FC<ToastProps> = ({
       className={`toast ${type}${isExiting ? " toast-exit" : ""}${
         className ? ` ${className}` : ``
       }`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onClick={close}
     >
       {message}
