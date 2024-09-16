@@ -25,7 +25,10 @@ const LogoutButton: React.FC = () => {
 
   return (
     <form onSubmit={handleLogout}>
-      <Button loading={loading} className="flex items-center">
+      <Button
+        loading={loading}
+        className="flex items-center justify-center w-full"
+      >
         Logout
       </Button>
     </form>
