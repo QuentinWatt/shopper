@@ -19,9 +19,9 @@ const Toast: React.FC<ToastProps> = ({
   className = "",
   ...props
 }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [isExiting, setIsExiting] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [progress, setProgress] = useState<number>(0);
+  const [isExiting, setIsExiting] = useState<boolean>(false);
 
   const close = useCallback(() => {
     setIsExiting(true);
