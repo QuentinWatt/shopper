@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import ProfileMenu from "./ProfileMenu";
 import AuthContext from "@/providers/auth/AuthContext";
 
@@ -49,7 +49,7 @@ describe("ProfileMenu", () => {
     expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument();
   });
 
-  it("closes the profile menu when the user clicks outside the profile menu", () => {
+  it("closes the profile menu when the user clicks outside the profile menu", async () => {
     const profileButton = screen.getByTestId("profile-button");
     fireEvent.click(profileButton);
 
@@ -58,8 +58,10 @@ describe("ProfileMenu", () => {
     const outsideElement = screen.getByTestId("outside-element");
     fireEvent.click(outsideElement);
 
-    expect(
-      screen.queryByRole("button", { name: /logout/i })
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("button", { name: /logout/i })
+      ).not.toBeInTheDocument();
+    });
   });
 });
