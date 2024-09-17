@@ -1,0 +1,29 @@
+name: Storefront
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install PNPM globally
+        run: npm install -g pnpm
+
+      - name: Install dependencies in Storefront
+        run: pnpm install
+        working-directory: ./storefront
+
+      - name: Run linter in Storefront
+        run: pnpm lint
+        working-directory: ./storefront
