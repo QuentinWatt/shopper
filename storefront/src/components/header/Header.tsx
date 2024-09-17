@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header: React.FC = () => {
   return (
     <header className="border-b">
-      <div className="container mx-auto flex justify-between items-center h-16">
+      <div className="container mx-auto flex justify-between items-center h-16 px-3">
         <Link href={"/"}>
           <LogoFull />
         </Link>
