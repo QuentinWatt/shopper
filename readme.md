@@ -4,10 +4,19 @@ This Shopper repostiory is a demonstration of how multiple front ends can intera
 
 ## Technology in this repository
 
-- Docker
-- Laravel
-- React JS
-- Next JS (to be added soon)
+- Laravel for the centralized [API]('./shopper-be/README.md')
+  - Docker
+  - Pest Tests
+- Vite + React JS for the [Backoffice]('./backoffice/README.md')
+  - Typescript
+  - React Test Library
+  - Axios
+  - Tailwind
+- Next JS for the [Storefront]('./storefront/README.md')
+  - Typescript
+  - React Test Library
+  - Axios
+  - Tailwind
 
 ## Get Started
 
