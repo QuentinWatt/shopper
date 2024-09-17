@@ -1,6 +1,11 @@
 import ProductEditContext from "@/providers/products/ProductEditContext";
 import { fireEvent, render, screen } from "@testing-library/react";
 import ProductEditForm from "./ProductEditForm";
+import ProductDeleteButton from "./ProductDeleteButton";
+
+vi.mock("./ProductDeleteButton.tsx", () => ({
+  default: vi.fn(() => <button>Mock delete button</button>),
+}));
 
 describe("Product Edit Form", () => {
   const product = {
