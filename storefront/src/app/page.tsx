@@ -14,7 +14,7 @@ const fetchFeaturedProducts = async () => {
 };
 
 const Page: React.FC = async () => {
-  const featuredProducts = await fetchFeaturedProducts();
+  const featuredProducts: TProduct[] = await fetchFeaturedProducts();
 
   return (
     <div className="container mx-auto my-6 px-3">
