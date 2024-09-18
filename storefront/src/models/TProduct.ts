@@ -4,4 +4,6 @@ export type TProduct = {
   description: string;
   sku: string;
   price_cents: string;
+  created_at: string;
+  updated_at: string;
 };
