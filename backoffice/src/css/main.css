@@ -4,7 +4,6 @@
 
 /** components */
 @import "tailwindcss/components";
-@import "../components/navigation/ProfileMenu.css";
 @import "../components/shared/alerts/Alert.css";
 @import "../components/shared/Button.css";
 @import "../components/shared/Loader/Loader.css";
