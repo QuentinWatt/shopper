@@ -90,6 +90,7 @@ const Toast: React.FC<ToastProps> = ({
     >
       {message}
       <div
+        role="progressbar"
         className={styles["toast-progress"]}
         style={{ width: `${progress}%` }}
       />
