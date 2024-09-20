@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import LogoutButton from "../auth/LogoutButton";
 import Panel from "../shared/layout/Panel";
 import ClickOutside from "../shared/ClickOutside";
+import styles from "./ProfileMenu.module.css";
 
 const ProfileMenu: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -30,7 +31,7 @@ const ProfileMenu: React.FC = () => {
         <ClickOutside
           onClickOutside={() => closeMenu()}
           data-testid="profile-dropdown-menu"
-          className={`menu${isExiting ? " menu-exit" : ""}`}
+          className={`${styles.menu}${isExiting ? ` ${styles.menu_exit}` : ""}`}
         >
           <Panel className="w-48 shadow">
             <ul>

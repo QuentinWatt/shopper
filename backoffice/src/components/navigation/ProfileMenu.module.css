@@ -1,0 +1,29 @@
+.menu {
+  @apply absolute top-12 right-0;
+  animation: dropDown 0.3s ease forwards;
+}
+
+.menu_exit {
+  animation: flyUp 0.3s ease forwards;
+}
+
+@keyframes dropDown {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes flyUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}
