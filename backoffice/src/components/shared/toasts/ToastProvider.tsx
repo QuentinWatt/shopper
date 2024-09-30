@@ -27,7 +27,7 @@ const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     <ToastContext.Provider value={{ toasts, setToasts, addToast, removeToast }}>
       {children}
       {toasts.length > 0 && (
-        <div className="toast-container">
+        <div className="fixed top-5 w-72 left-1/2 -translate-x-1/2 z-100">
           {toasts.map((toast) => (
             <Toast
               key={toast.id}

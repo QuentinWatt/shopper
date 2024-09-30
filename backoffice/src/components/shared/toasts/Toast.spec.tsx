@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import Toast from "./Toast";
+import styles from "./Toast.module.css";
 
 describe("Toast", () => {
   it("renders the message", () => {
@@ -8,45 +9,36 @@ describe("Toast", () => {
   });
 
   it("has a div as a progress bar", () => {
-    const { container } = render(
-      <Toast id="someid" message="my custom message" />
-    );
-    const toastProgress = container.querySelector("div.toast-progress");
-    expect(toastProgress).toBeInTheDocument();
+    render(<Toast id="someid" message="my custom message" />);
+    const toast = screen.getByText(/my custom message/i);
+    const toastProgress = within(toast).getByRole("progressbar");
+    expect(toastProgress).toHaveClass(styles["toast-progress"]);
   });
 
   it("defaults to an info type class", () => {
-    const { container } = render(
-      <Toast id="someid" message="my custom message" />
-    );
-    const toast = container.querySelector("div.toast");
-    expect(toast).toHaveClass("info");
+    render(<Toast id="someid" message="my custom message" />);
+    const toast = screen.getByText(/my custom message/i);
+    expect(toast).toHaveClass(styles.info);
   });
 
   it("has an error type class", () => {
-    const { container } = render(
-      <Toast id="someid" message="whoops!" type="error" />
-    );
-    const toast = container.querySelector("div.toast");
-    expect(toast).toHaveClass("error");
-    expect(toast).not.toHaveClass("info");
+    render(<Toast id="someid" message="whoops!" type="error" />);
+    const toast = screen.getByText(/whoops!/i);
+    expect(toast).toHaveClass(styles.error);
+    expect(toast).not.toHaveClass(styles.info);
   });
 
   it("has an error type class", () => {
-    const { container } = render(
-      <Toast id="someid" message="success" type="success" />
-    );
-    const toast = container.querySelector("div.toast");
-    expect(toast).toHaveClass("success");
-    expect(toast).not.toHaveClass("info");
+    render(<Toast id="someid" message="success" type="success" />);
+    const toast = screen.getByText(/success/i);
+    expect(toast).toHaveClass(styles.success);
+    expect(toast).not.toHaveClass(styles.info);
   });
 
   it("has a warning type class", () => {
-    const { container } = render(
-      <Toast id="someid" message="careful!" type="warning" />
-    );
-    const toast = container.querySelector("div.toast");
-    expect(toast).toHaveClass("warning");
-    expect(toast).not.toHaveClass("info");
+    render(<Toast id="someid" message="careful!" type="warning" />);
+    const toast = screen.getByText(/careful!/i);
+    expect(toast).toHaveClass(styles.warning);
+    expect(toast).not.toHaveClass(styles.info);
   });
 });

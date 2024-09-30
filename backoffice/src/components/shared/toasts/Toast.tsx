@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { ToastType } from "./types";
+import styles from "./Toast.module.css";
 
 type ToastProps = {
   id: string;
@@ -80,15 +81,19 @@ const Toast: React.FC<ToastProps> = ({
   return (
     <div
       {...props}
-      className={`toast ${type}${isExiting ? " toast-exit" : ""}${
-        className ? ` ${className}` : ``
-      }`}
+      className={`${styles.toast} ${styles[type]}${
+        isExiting ? ` ${styles["toast-exit"]}` : ""
+      }${className ? ` ${className}` : ``}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={close}
     >
       {message}
-      <div className="toast-progress" style={{ width: `${progress}%` }} />
+      <div
+        role="progressbar"
+        className={styles["toast-progress"]}
+        style={{ width: `${progress}%` }}
+      />
     </div>
   );
 };
